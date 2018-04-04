@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample VueJs</title>
+    <link href="styles.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="vue-app">\
+        <h1>Vue Instance</h1>
+        <p>{{ greet('afternoon') }}</p>
+        <p>{{ name }}</p>
+        <p>{{ job }}</p>
+    </div>
+
+    <div id="vue-binding">
+      <h1>Vue Data Binding</h1>
+      <p>Binding weblink data</p>
+      <a v-bind:href="website">this is a link to google</a>
+      <br/>
+      <input type="text" v-bind:value="name"/>
+      <br/>
+      <p v-html="webtag"></p>
+    </div>
+
+    <div id="vue-events">
+      <h1>Vue Events</h1>
+      <p>direct from html</p>
+      <button v-on:click="age++">Add a year</button>
+      <button v-on:click="age--">Subtract a year</button>
+      <br/>
+      <p>from function</p>
+      <button v-on:click="add(1)">Add a year</button>
+      <button v-on:click="subtract(1)">Subtract a year</button>
+      <br/>
+      <p>from function with parameter</p>
+      <button v-on:dblclick="add(10)">Add 10 years on double click</button>
+      <button v-on:dblclick="subtract(10)">Subtract 10 years on double click</button>
+      <p>My age is {{ age }}</p>
+      <p>Note: instead of v-on: we can use @ for a shorthand
+      <br/>
+      <p>Vue Mouse Events</p>
+      <div id="canvas" v-on:mousemove="updateXY"> {{x}}, {{y}}</div>
+    </div>
+
+    <div id="vue-events-modifier">
+      <h1>Vue Event Modifiers</h1>
+      <p>this will only execute once because of the modifier v-on:click.once</p>
+      <button type="button" v-on:click.once="popOnce">click me</button>
+      <br/>
+      <p>With link we can override the default behavior using .prevent modifier</p>
+      <a v-on:click.prevent="alertMe" href="https://www.google.com.ph/"> Click this link</a>
+    </div>
+
+    <div id="vue-keyboard-events">
+      <h1>Vue Keyboard Events</h1>
+      <label>Name:</label>
+      <input type="text" v-on:keyup.enter="logName">
+      <label>Age:</label>
+      <input type="text" v-on:keyup.alt.enter="logAge">
+      <p>Note: we can combine key event like alt + enter with this format v-on:keyup.alt.enter</p>
+      <a href="https://vuejs.org/v2/guide/events.html#Event-Modifiers"> here is the reference for key events </a>
+    </div>
+
+    <div id="vue-two-way-data-binding">
+      <h1>Vue Two way data binding</h1>
+      <label>Name:</label>
+      <input type="text" v-model="name">
+      <span>{{ name }}
+        <br/>
+      <label>Age:</label>
+      <input type="text" v-model="age">
+      <span>{{ age }}</span>
+    </div>
+
+    <div id="computed-properties">
+      <h1>Vue Computed Properties</h1>
+      <button type="button" v-on:click="a++">Add to A</button>
+      <button type="button" v-on:click="b++">Add to B</button>
+      <p>A - {{ a }}</p>
+      <p>B - {{ b }}</p>
+      <p>Age + A = {{ addToA }} </p>
+      <p>Age + B = {{ addToB }}</p>
+    </div>
+
+    <div id="dynamic-css">
+      <h1>Vue Dynamic CSS</h1>
+      <h2>Example 1</h2>
+      <!-- <div v-on:click="available = !available" v-bind:class="{available: available}">
+        <span>Zoilo</span>
+      </div> -->
+      <h2>Example 2</h2>
+      <button type="button" v-on:click="nearby = !nearby">Toggle nearby</button>
+      <button type="button" v-on:click="available = !available">Toggle available</button>
+      <div v-bind:class="compClasses">
+        <span>Zoilo</span>
+      </div>
+    </div>
+
+    <div id="conditional">
+      <h1>Conditionals</h1>
+      <button type="button" v-on:click="error = !error" name="button">Toggle Error</button>
+      <button type="button" v-on:click="success = !success" name="button">Toggle Success</button>
+      <!-- <p v-if="error">There has been an error</p>
+      <p v-else-if="success">Woooh success :)</p> -->
+      <p v-show="error">There has been an error</p>
+      <p v-show="success">Woooh success :)</p>
+      <br/>
+      <p>Note: The difference between v-if and v-show, with v-if when false it will remove the element from the DOM <br/>
+      unlike v-show it will only add a style display:none</p>
+    </div>
+
+    <div id="looping-vfor">
+      <h1>Looping with v-for</h1>
+      <ul>
+        <li v-for="character in characters">{{character}}</li>
+      </ul>
+      <ul>
+        <li v-for="(ninja, index) in ninjas">{{index}}. {{ninja.name}} - {{ninja.age}}</li>
+      </ul>
+
+      <template v-for="(ninja, index) in ninjas">
+        <h3>{{ninja.name}}</h3>
+        <p>{{ninja.age}}</p>
+      </template>
+
+      <template v-for="ninja in ninjas">
+        <div v-for="(val, key) in ninja">
+          <p>{{key}} - {{val}}</p>
+        </div>
+      </template>
+    </div>
+
+<script src="app.js"></script>
+<script src="databinding.js"></script>
+<script src="events.js"></script>
+<script src="event-modifier.js"></script>
+<script src="keyboard-events.js"></script>
+<script src="two-way-data-binding.js"></script>
+<script src="computed-properties.js"></script>
+<script src="dynamic-css.js"></script>
+<script src="conditional.js"></script>
+<script src="loopingvfor.js"></script>
+</body>
+</html>
